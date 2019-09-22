@@ -1,0 +1,23 @@
+<?xml version='1.0' standalone='yes' ?>
+<reports>
+ <report>
+  <id>1</id>
+  <query>SELECT ${OSPITI AREA ATTESA.SESSO},count(*) AS TOTALE FROM ${OSPITI AREA ATTESA} GROUP BY ${OSPITI AREA ATTESA.SESSO} ORDER BY ${OSPITI AREA ATTESA.SESSO}</query>
+  <graphs>
+   <graph>
+    <id>1</id>
+	<filename>rep1.png</filename>
+	<width>500</width>
+	<height>400</height>
+	<type>pie</type>
+    <title>Area attesa - Ospiti registrati</title>
+   </graph>
+   <graph>
+    <id>2</id>
+	<type>table</type>
+    <title>Area attesa - Ospiti registrati</title>
+	<sum>1</sum>
+   </graph>
+  </graphs>
+ </report>
+</reports>

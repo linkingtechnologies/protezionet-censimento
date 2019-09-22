@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='iso-8859-1'?>
+
+<pdf title="Area attesa - Badge con QR Code" creator="https://github.com/linkingtechnologies/protezionet-censimento">
+
+<body unit='mm' margins='15'>
+
+<!-- 85x54 -->
+<!-- 75x51 -->
+<!-- $BeginBlock form -->
+<page font="helvetica">
+	<paragraph textalign="L">Modello non utilizzabile in modalità "scheda".</paragraph>
+</page>
+<!-- $EndBlock form -->
+
+<page font="helvetica" orientation="l" fontsize="10" width="85" height="54">
+	<qrcode top="5" left="10" size="40" position="absolute" level="M" base64="yes" content="${filtro applicato 1}%<!-- $Include var/templates/it/codice_area_attesa.txt -->%${totale righe tabella}<!-- $BeginBlock table -->%<!-- $BeginBlock row1 -->${codice fiscale}|${cognome}|${nome}|${identificativo nucleo familiare}<!-- $EndBlock row1 -->%<!-- $BeginBlock row2 -->${codice fiscale}|${cognome}|${nome}|${identificativo nucleo familiare}<!-- $EndBlock row2 -->%<!-- $BeginBlock row3 -->${codice fiscale}|${cognome}|${nome}|${identificativo nucleo familiare}<!-- $EndBlock row3 -->%<!-- $BeginBlock row4 -->${codice fiscale}|${cognome}|${nome}|${identificativo nucleo familiare}<!-- $EndBlock row4 -->%<!-- $BeginBlock row5 -->${codice fiscale}|${cognome}|${nome}|${identificativo nucleo familiare}<!-- $EndBlock row5 --><!-- $EndBlock table -->" />
+	<paragraph top="7" left="55" fontsize="10" position="absolute" border="0" textalign="L">${filtro applicato 1}</paragraph>
+	<paragraph top="17" left="55" fontsize="24" fontstyle="B" position="absolute" border="0" textalign="L"><!-- $Include var/templates/it/codice_area_attesa.txt --></paragraph>
+	<paragraph top="24" left="55" fontsize="24" fontstyle="B" position="absolute" border="0" textalign="L">${totale righe tabella}</paragraph>	
+</page>
+
+</body>
+</pdf>

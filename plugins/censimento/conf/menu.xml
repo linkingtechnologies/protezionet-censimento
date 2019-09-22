@@ -1,0 +1,32 @@
+<?xml version='1.0' standalone='yes'?>
+<menu>
+ <tab>
+  <id>m0</id>
+  <title>GESTIONE CENSIMENTO</title>
+  <url>?dashboard=m0</url>
+  <pages>c01,c02</pages>
+ </tab>
+ <tab>
+  <id>m1</id>
+  <title>REPORT</title>
+  <url>?dashboard=m1</url>
+  <pages>01,12,12l</pages>
+ </tab>
+ <tab>
+  <id>m5</id>
+  <title>VERIFICA DATI</title>
+  <url>?dashboard=m5</url>
+  <pages>ic1</pages>
+ </tab>
+ <tab>
+  <id>m2</id>
+  <title>CONFIGURAZIONE</title>
+  <url>?dashboard=m2</url>
+  <pages>00,05,06,30,31</pages>
+ </tab>
+ <tab>
+  <id>m4</id>
+  <title>AIUTO</title>
+  <url>?dashboard=m4</url>
+ </tab>
+</menu>

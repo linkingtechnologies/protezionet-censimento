@@ -1,0 +1,23 @@
+<?xml version='1.0' standalone='yes'?>
+<integrity>
+  <checks>
+    <check>
+      <id>1</id>
+      <title>Ospiti con sesso non specificato</title>
+      <query>SELECT ${OSPITI.CODICE FISCALE} "CODICE FISCALE",${OSPITI.COGNOME} COGNOME, ${OSPITI.NOME} NOME FROM ${OSPITI} WHERE ${OSPITI.SESSO} IS NULL OR ${OSPITI.SESSO}='n.d.' OR ${OSPITI.SESSO}=''</query>
+      <source>db</source>
+	  <object>ospiti</object>
+      <type>count</type>
+      <result>
+        <none>
+	      <code>success</code>
+	      <message></message>
+        </none>
+	    <multi>
+	      <code>warning</code>
+	      <message>Ci sono ospiti con sesso non indicato.</message>
+        </multi>
+      </result>
+    </check>
+  </checks>
+</integrity>

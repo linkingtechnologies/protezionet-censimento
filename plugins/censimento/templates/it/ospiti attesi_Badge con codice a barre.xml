@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='iso-8859-1'?>
+
+<pdf title="Ospiti attesi - Badge con codice a barre" creator="https://github.com/linkingtechnologies/protezionet-censimento">
+
+<body unit='mm' margins='15'>
+
+<!-- 85x54 -->
+<!-- 75x51 -->
+<!-- $BeginBlock form -->
+<page font="helvetica" orientation="l" fontsize="10" width="85" height="54">
+	<barcode y="35" x="5" height="6" width=".2" position="absolute" barcode="${codice badge}" norm="code39extend"/>
+</page>
+<!-- $EndBlock form -->
+
+<!-- $BeginBlock table -->
+<page font="helvetica" orientation="l" fontsize="10" width="85" height="54">
+<!-- $BeginBlock row1 -->
+	<barcode y="35" x="5" height="6" width=".2" position="absolute" barcode="${codice badge}" norm="code39extend"/>
+<!-- $EndBlock row1 -->
+</page>
+<!-- $EndBlock table-->
+
+</body>
+</pdf>
