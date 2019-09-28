@@ -2,7 +2,7 @@
 <reports>
  <report>
   <id>1</id>
-  <query>SELECT count(*) AS TOTALE FROM ${OSPITI AREA ATTESA}</query>
+  <query>SELECT 'REGISTRAZIONI', count(*) AS TOTALE FROM ${OSPITI AREA ATTESA}</query>
   <graphs>
    <graph>
     <id>1</id>
@@ -14,7 +14,7 @@
  </report>
  <report>
   <id>2</id>
-  <query>SELECT COUNT(*) AS TOTALE FROM (SELECT COUNT(*) FROM ${OSPITI AREA ATTESA} GROUP BY ${OSPITI AREA ATTESA.IDENTIFICATIVO NUCLEO FAMILIARE}) AS subquery</query>
+  <query>SELECT 'NUCLEI FAMILIARI',COUNT(*) AS TOTALE FROM (SELECT COUNT(*) FROM ${OSPITI AREA ATTESA} GROUP BY ${OSPITI AREA ATTESA.IDENTIFICATIVO NUCLEO FAMILIARE}) AS subquery</query>
   <graphs>
    <graph>
     <id>1</id>
@@ -26,7 +26,7 @@
  </report>
  <report>
   <id>3</id>
-  <query>SELECT COUNT(*) AS TOTALE FROM (SELECT COUNT(*) FROM ${OSPITI AREA ATTESA} GROUP BY ${OSPITI AREA ATTESA.CODICE BADGE}) AS subquery</query>
+  <query>SELECT 'BADGE RILASCIATI',COUNT(*) AS TOTALE FROM (SELECT COUNT(*) FROM ${OSPITI AREA ATTESA} GROUP BY ${OSPITI AREA ATTESA.CODICE BADGE}) AS subquery</query>
   <graphs>
    <graph>
     <id>1</id>
@@ -38,7 +38,7 @@
  </report>
  <report>
   <id>11</id>
-  <query>SELECT COUNT(*) AS TOTALE FROM ${OSPITI AREA INCONTRO}</query>
+  <query>SELECT 'REGISTRAZIONI', COUNT(*) AS TOTALE FROM ${OSPITI AREA INCONTRO}</query>
   <graphs>
    <graph>
     <id>1</id>
