@@ -2,20 +2,48 @@
 <reports>
  <report>
   <id>1</id>
-  <query>SELECT ${OSPITI AREA ATTESA.SESSO},count(*) AS TOTALE FROM ${OSPITI AREA ATTESA} GROUP BY ${OSPITI AREA ATTESA.SESSO} ORDER BY ${OSPITI AREA ATTESA.SESSO}</query>
+  <query>SELECT count(*) AS TOTALE FROM ${OSPITI AREA ATTESA}</query>
   <graphs>
    <graph>
     <id>1</id>
-	<filename>rep1.png</filename>
-	<width>500</width>
-	<height>400</height>
-	<type>pie</type>
-    <title>Area attesa - Ospiti registrati</title>
-   </graph>
-   <graph>
-    <id>2</id>
 	<type>table</type>
-    <title>Area attesa - Ospiti registrati</title>
+    <title>Area Attesa - Ospiti registrati</title>
+	<sum>1</sum>
+   </graph>
+  </graphs>
+ </report>
+ <report>
+  <id>2</id>
+  <query>SELECT COUNT(*) AS TOTALE FROM (SELECT COUNT(*) FROM ${OSPITI AREA ATTESA} GROUP BY ${OSPITI AREA ATTESA.IDENTIFICATIVO NUCLEO FAMILIARE}) AS subquery</query>
+  <graphs>
+   <graph>
+    <id>1</id>
+	<type>table</type>
+    <title>Area Attesa - Nuclei familiari registrati</title>
+	<sum>1</sum>
+   </graph>
+  </graphs>
+ </report>
+ <report>
+  <id>3</id>
+  <query>SELECT COUNT(*) AS TOTALE FROM (SELECT COUNT(*) FROM ${OSPITI AREA ATTESA} GROUP BY ${OSPITI AREA ATTESA.CODICE BADGE}) AS subquery</query>
+  <graphs>
+   <graph>
+    <id>1</id>
+	<type>table</type>
+    <title>Area Attesa - Badge rilasciati</title>
+	<sum>1</sum>
+   </graph>
+  </graphs>
+ </report>
+ <report>
+  <id>11</id>
+  <query>SELECT COUNT(*) AS TOTALE FROM ${OSPITI AREA INCONTRO}</query>
+  <graphs>
+   <graph>
+    <id>1</id>
+	<type>table</type>
+    <title>Area Incontro - Ospiti registrati</title>
 	<sum>1</sum>
    </graph>
   </graphs>
