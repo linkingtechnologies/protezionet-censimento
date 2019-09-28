@@ -4,7 +4,7 @@
   <id>m0</id>
   <title>GESTIONE CENSIMENTO</title>
   <url>?dashboard=m0</url>
-  <pages>c01,c02</pages>
+  <pages>c01,c02,c03</pages>
  </tab>
  <tab>
   <id>m1</id>
@@ -23,10 +23,5 @@
   <title>CONFIGURAZIONE</title>
   <url>?dashboard=m2</url>
   <pages>00,05,06,30,31</pages>
- </tab>
- <tab>
-  <id>m4</id>
-  <title>AIUTO</title>
-  <url>?dashboard=m4</url>
  </tab>
 </menu>

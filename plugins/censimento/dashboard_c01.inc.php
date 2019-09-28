@@ -25,8 +25,6 @@ while (!$result2->EOF) {
 
 
 $lang = 'it';
-$camilaTemplate = new CamilaTemplate($lang);
-$params = $camilaTemplate->getParameters();
 
 $form = new phpform($_REQUEST['dashboard'],'index.php?dashboard=' . $_REQUEST['dashboard']);
 $form->submitbutton = 'Cerca';
@@ -34,6 +32,9 @@ $form->drawrules = true;
 $form->preservecontext = true;
 
 new form_textbox($form, 'search', 'Nucleo familiare', false, 50, 200);
+
+if ($_REQUEST['cf'] != '')
+	$form->fields['search']->value = $_REQUEST['cf'];
 $form->fields['search']->set_css_class('form-control');
 
 $inserted = false;
@@ -106,8 +107,7 @@ if ($form->process())
 			$myLink = new CHAW_link('Visualizza dati inseriti', $link);
 			$myLink->set_css_class('btn btn-md btn-default btn-info');
 			$myLink->set_br(2);
-			$_CAMILA['page']->add_link($myLink);
-			
+			$_CAMILA['page']->add_link($myLink);			
 		}
 		else
 			$form->draw();

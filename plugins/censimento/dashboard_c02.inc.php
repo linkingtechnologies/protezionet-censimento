@@ -18,6 +18,10 @@ $ovCol3 = "IDENTIFICATIVO NUCLEO FAMILIARE";
 $ovColName3 = "";
 $ovCol4 = "CODICE BADGE";
 $ovColName4 = "";
+$ovCol5 = "AREA D'ATTESA";
+$ovColName5 = "";
+
+$keyColumn = "CODICE FISCALE";
 
 $result2 = $camilaWT->getWorktableColumnsById($wtTo2Id);
 while (!$result2->EOF) {
@@ -34,12 +38,13 @@ while (!$result2->EOF) {
 	if (strtolower($ovCol4) == strtolower($b['name'])) {
 		$ovColName4 = $b['col_name'];
 	}
+	if (strtolower($ovCol5) == strtolower($b['name'])) {
+		$ovColName5 = $b['col_name'];
+	}
 	$result2->MoveNext();
 }
 
 $lang = 'it';
-$camilaTemplate = new CamilaTemplate($lang);
-$params = $camilaTemplate->getParameters();
 
 $form = new phpform($_REQUEST['dashboard'],'index.php?dashboard=' . $_REQUEST['dashboard']);
 $form->submitbutton = 'Registra';
@@ -82,7 +87,7 @@ if ($form->process())
 					$row = explode($del2, $v);
 					$cf = $row[0];
 					if ($cf != '') {
-						$myHelpId = $camilaWT->getWorktableRecordIdByKeyColumn($wtFrom, "CODICE FISCALE", $cf);
+						$myHelpId = $camilaWT->getWorktableRecordIdByKeyColumn($wtFrom, $keyColumn, $cf);
 						if ($myHelpId != '') {
 							$suggIds[] = $myHelpId;
 							$ov = Array();
@@ -90,8 +95,33 @@ if ($form->process())
 							$ov[$ovColName2] = $row[2];
 							$ov[$ovColName3] = $row[3];
 							$ov[$ovColName4] = $k0;
+							$ov[$ovColName5] = $k1;
 							camila_information_text($cf . ' | ' . $row[1].' '.$row[2].' | Nucleo famigliare: '.$row[3]);
 							$overrides[$myHelpId] = $ov;
+						} else {
+							$fields8=Array();
+							$values8=Array();
+							$fields8[] = $keyColumn;
+							$fields8[] = $ovCol1;
+							$fields8[] = $ovCol2;
+							$fields8[] = $ovCol3;
+							$fields8[] = $ovCol4;
+							$fields8[] = $ovCol5;
+							$values8[] = $cf;
+							$values8[] = $row[1];
+							$values8[] = $row[2];
+							$values8[] = $row[3];
+							$values8[] = $k0;
+							$values8[] = $k1;
+							//Controllare esito
+							
+							$res = $camilaWT->insertRow($wtTo2, $lang, $fields8, $values8);
+							if ($res === false) {
+								camila_error_text('Errore inserimento: ' . $cf . ' | ' . $row[1].' '.$row[2].' | Nucleo famigliare: '.$row[3]);
+							} else {
+								camila_information_text($cf . ' | ' . $row[1].' '.$row[2].' | Nucleo famigliare: '.$row[3]);
+								$inserted = true;
+							}
 						}
 					}
 				}
@@ -100,8 +130,7 @@ if ($form->process())
 			if (count($suggIds)>0) {
 				if (!$camilaWT->insertSuggestionRecords($wtFrom, $wtTo2, implode($suggIds, ','),$overrides))
 					camila_error_text("Si è verificato un errore nell'inserimento!");
-				else
-					$inserted = true;
+				else $inserted = true;
 			}
 		} else {
 			camila_error_text("Il codice QR Code inserito non è valido.");
