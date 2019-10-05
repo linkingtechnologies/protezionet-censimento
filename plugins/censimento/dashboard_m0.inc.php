@@ -15,9 +15,9 @@ $camilaUI->insertButton('cf_worktable'.$g1Sheet.'.php?camila_update=new', 'Regis
 $_CAMILA['page']->add_raw(new HAW_raw(HAW_HTML, '</div>'));
 $_CAMILA['page']->add_raw(new HAW_raw(HAW_HTML, '<div class="col-xs-12 col-md-6">'));
 $camilaUI->insertTitle('Area incontro', 'user');
-$camilaUI->insertButton('?dashboard=c02', 'Registrazione tramite QR Code', 'qrcode');
-$camilaUI->insertButton('cf_worktable'.$g3Sheet.'.php?camila_update=new', 'Registrazione tramite Badge', 'barcode');
-$camilaUI->insertButton('cf_worktable'.$g2Sheet.'.php?camila_update=new', 'Registrazione ospite', 'plus');
+$camilaUI->insertButton('?dashboard=c02', 'Check-in tramite QR Code', 'qrcode');
+$camilaUI->insertButton('cf_worktable'.$g3Sheet.'.php?camila_update=new', 'Check-in tramite codice a barre', 'barcode');
+//$camilaUI->insertButton('cf_worktable'.$g2Sheet.'.php?camila_update=new', 'Registrazione ospite', 'plus');
 $_CAMILA['page']->add_raw(new HAW_raw(HAW_HTML, '</div>'));
 $_CAMILA['page']->add_raw(new HAW_raw(HAW_HTML, '</div>'));
 
