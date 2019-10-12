@@ -1,6 +1,19 @@
 <?xml version='1.0' standalone='yes' ?>
 <reports>
  <report>
+  <id>0</id>
+  <query>SELECT NUM, COUNT(*) FROM (SELECT COUNT(*) AS NUM FROM ${OSPITI ATTESI} GROUP BY ${OSPITI ATTESI.IDENTIFICATIVO NUCLEO FAMILIARE}) GROUP BY NUM ORDER BY NUM</query>
+  <graphs>
+   <graph>
+    <id>1</id>
+	<type>table</type>
+    <title>Ospiti attesi - Numerosita' nuclei familiari</title>
+	<sum>1</sum>
+   </graph>
+  </graphs>
+ </report>
+ 
+ <report>
   <id>1</id>
   <query>SELECT 'REGISTRAZIONI', count(*) AS TOTALE FROM ${OSPITI AREA ATTESA}</query>
   <graphs>
@@ -38,10 +51,18 @@
  </report>
  <report>
   <id>11</id>
-  <query>SELECT 'REGISTRAZIONI', COUNT(*) AS TOTALE FROM ${OSPITI AREA INCONTRO}</query>
+  <query>SELECT 'OSPITI' AS REGISTRAZIONE, COUNT(*) AS TOTALE FROM ${OSPITI AREA INCONTRO} UNION SELECT 'BADGE' AS REGISTRAZIONE, IFNULL(SUM(${BADGE AREA INCONTRO.NUMERO OSPITI}),0) AS TOTALE FROM ${BADGE AREA INCONTRO}</query>
   <graphs>
    <graph>
     <id>1</id>
+	<filename>rep2.png</filename>
+	<width>500</width>
+	<height>200</height>
+	<type>pie</type>
+    <title>Ospiti Area Incontro per tipologia registrazione</title>
+   </graph>
+   <graph>
+    <id>2</id>
 	<type>table</type>
     <title>Area Incontro - Ospiti registrati</title>
 	<sum>1</sum>

@@ -8,14 +8,17 @@
 <!-- 75x51 -->
 <!-- $BeginBlock form -->
 <page font="helvetica" orientation="l" fontsize="10" width="85" height="54">
-	<barcode y="35" x="5" height="6" width=".2" position="absolute" barcode="${codice badge}" norm="code39extend"/>
+
+	<image top="11" left="53" height="30" width="30" position="absolute" file="<!-- $Include var/templates/it/logo.txt -->" />
+	<barcode y="30" x="5" height="10" width=".4" position="absolute" barcode="${codice badge}" norm="code39extend"/>
 </page>
 <!-- $EndBlock form -->
 
 <!-- $BeginBlock table -->
 <page font="helvetica" orientation="l" fontsize="10" width="85" height="54">
 <!-- $BeginBlock row1 -->
-	<barcode y="35" x="5" height="6" width=".2" position="absolute" barcode="${codice badge}" norm="code39extend"/>
+	<image top="11" left="53" height="30" width="30" position="absolute" file="<!-- $Include var/templates/it/logo.txt -->" />
+	<barcode y="30" x="5" height="10" width=".4" position="absolute" barcode="${codice badge}" norm="code39extend"/>
 <!-- $EndBlock row1 -->
 </page>
 <!-- $EndBlock table-->

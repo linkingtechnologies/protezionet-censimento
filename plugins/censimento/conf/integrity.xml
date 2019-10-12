@@ -3,8 +3,8 @@
   <checks>
     <check>
       <id>1</id>
-      <title>Ospiti con sesso non specificato</title>
-      <query>SELECT ${OSPITI.CODICE FISCALE} "CODICE FISCALE",${OSPITI.COGNOME} COGNOME, ${OSPITI.NOME} NOME FROM ${OSPITI} WHERE ${OSPITI.SESSO} IS NULL OR ${OSPITI.SESSO}='n.d.' OR ${OSPITI.SESSO}=''</query>
+      <title>Ospiti con codice fiscale non specificato</title>
+      <query>SELECT ${OSPITI AREA ATTESA.CODICE FISCALE} "CODICE FISCALE",${OSPITI AREA ATTESA.COGNOME} COGNOME, ${OSPITI AREA ATTESA.NOME} NOME FROM ${OSPITI AREA ATTESA} WHERE ${OSPITI AREA ATTESA.SESSO} IS NULL OR ${OSPITI AREA ATTESA.SESSO}='n.d.' OR ${OSPITI AREA ATTESA.SESSO}=''</query>
       <source>db</source>
 	  <object>ospiti</object>
       <type>count</type>
@@ -15,7 +15,7 @@
         </none>
 	    <multi>
 	      <code>warning</code>
-	      <message>Ci sono ospiti con sesso non indicato.</message>
+	      <message>Ci sono ospiti con codice fiscale non indicato.</message>
         </multi>
       </result>
     </check>

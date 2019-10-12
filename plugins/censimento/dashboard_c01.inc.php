@@ -32,6 +32,7 @@ $form->drawrules = true;
 $form->preservecontext = true;
 
 new form_textbox($form, 'search', 'Nucleo familiare', false, 50, 200);
+$form->fields['search']->autofocus = true;
 
 if ($_REQUEST['cf'] != '')
 	$form->fields['search']->value = $_REQUEST['cf'];
@@ -73,23 +74,34 @@ if ($form->process())
 	$nFam = $form->fields['search']->value;
 
 	if ($nFam != '') {
-		$form->submitbutton = 'Registra';
 		$sql = "Select Id,\${OSPITI ATTESI.COGNOME},\${OSPITI ATTESI.NOME},\${OSPITI ATTESI.INDIRIZZO ABITAZIONE},\${OSPITI ATTESI.CITTA' ABITAZIONE} FROM \${".$wtFrom."} WHERE \${OSPITI ATTESI.IDENTIFICATIVO NUCLEO FAMILIARE}=".$camilaWT->db->qstr($nFam);
 		$result = $camilaWT->startExecuteQuery($sql);
-		$gResLabels = array();
-		$gResValues = array();
-		while (!$result->EOF) {
-			$a = $result->fields;
-			$gResValues[] = $a[0];
-			$gResLabels[] = $a[1].' '.$a[2] . ' | ' . $a[3].' | '.$a[4];
-			$result->MoveNext();
+		if ($result->RecordCount() == 0) {
+			$camilaUI->insertWarning('La ricerca non ha restituito alcun risultato!');
+			$sql = "Select Id,\${OSPITI ATTESI.IDENTIFICATIVO NUCLEO FAMILIARE} FROM \${".$wtFrom."} WHERE \${OSPITI ATTESI.CODICE FISCALE}=".$camilaWT->db->qstr($nFam);
+			$result2 = $camilaWT->startExecuteQuery($sql);
+			if ($result2->RecordCount() > 0) {
+				$b = $result2->fields;
+				$camilaUI->insertText('Il codice fiscale inserito appartiene al seguente nucleo familiare: ');
+				$camilaUI->insertLink('?dashboard=c01&cf='.urlencode($b[1]), $b[1]);				
+			}
+		} else {
+			$form->submitbutton = 'Registra';
+			$gResLabels = array();
+			$gResValues = array();
+			while (!$result->EOF) {
+				$a = $result->fields;
+				$gResValues[] = $a[0];
+				$gResLabels[] = $a[1].' '.$a[2] . ' | ' . $a[3].' | '.$a[4];
+				$result->MoveNext();
+			}
+
+			new form_checklist($form, 'children', $nFam, $gResLabels, $gResValues, false, false);
+			$form->fields['children']->cols = 1;
+			//$form->draw();
+
+			new form_textbox($form, 'badge', 'Codice Badge', true, 50, 200);
 		}
-
-		new form_checklist($form, 'children', $nFam, $gResLabels, $gResValues, false, false);
-		$form->fields['children']->cols = 1;
-		//$form->draw();
-
-		new form_textbox($form, 'badge', 'Codice Badge', true, 50, 200);
 
 		$text = new CHAW_text('');
 		$_CAMILA['page']->add_text($text);
@@ -107,7 +119,11 @@ if ($form->process())
 			$myLink = new CHAW_link('Visualizza dati inseriti', $link);
 			$myLink->set_css_class('btn btn-md btn-default btn-info');
 			$myLink->set_br(2);
-			$_CAMILA['page']->add_link($myLink);			
+			$_CAMILA['page']->add_link($myLink);
+			
+			
+			$camilaUI->insertButton('?dashboard=c01', 'Registrazione nuovo nucleo familiare', 'list-alt');
+			
 		}
 		else
 			$form->draw();
