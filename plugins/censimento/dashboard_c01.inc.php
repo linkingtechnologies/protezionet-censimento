@@ -71,14 +71,14 @@ if (count($ids) == 0 && $badge != '') {
 
 if ($form->process())
 {
-	$nFam = $form->fields['search']->value;
+	$nFam = strtoupper(trim($form->fields['search']->value));
 
 	if ($nFam != '') {
-		$sql = "Select Id,\${OSPITI ATTESI.COGNOME},\${OSPITI ATTESI.NOME},\${OSPITI ATTESI.INDIRIZZO ABITAZIONE},\${OSPITI ATTESI.CITTA' ABITAZIONE} FROM \${".$wtFrom."} WHERE \${OSPITI ATTESI.IDENTIFICATIVO NUCLEO FAMILIARE}=".$camilaWT->db->qstr($nFam);
+		$sql = "Select Id,\${OSPITI ATTESI.COGNOME},\${OSPITI ATTESI.NOME},\${OSPITI ATTESI.INDIRIZZO ABITAZIONE},\${OSPITI ATTESI.CITTA' ABITAZIONE} FROM \${".$wtFrom."} WHERE UPPER(\${OSPITI ATTESI.IDENTIFICATIVO NUCLEO FAMILIARE})=".$camilaWT->db->qstr($nFam);
 		$result = $camilaWT->startExecuteQuery($sql);
 		if ($result->RecordCount() == 0) {
 			$camilaUI->insertWarning('La ricerca non ha restituito alcun risultato!');
-			$sql = "Select Id,\${OSPITI ATTESI.IDENTIFICATIVO NUCLEO FAMILIARE} FROM \${".$wtFrom."} WHERE \${OSPITI ATTESI.CODICE FISCALE}=".$camilaWT->db->qstr($nFam);
+			$sql = "Select Id,\${OSPITI ATTESI.IDENTIFICATIVO NUCLEO FAMILIARE} FROM \${".$wtFrom."} WHERE UPPER(\${OSPITI ATTESI.CODICE FISCALE})=".$camilaWT->db->qstr($nFam);
 			$result2 = $camilaWT->startExecuteQuery($sql);
 			if ($result2->RecordCount() > 0) {
 				$b = $result2->fields;

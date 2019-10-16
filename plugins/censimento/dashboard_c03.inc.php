@@ -24,7 +24,7 @@ $form->fields['fiscalcode']->autofocus = true;
 
 if ($form->process())
 {
-	$fiscalcode = $form->fields['fiscalcode']->value;
+	$fiscalcode = strtoupper(trim($form->fields['fiscalcode']->value));
 	$lastname = $form->fields['lastname']->value;
 	$firstname = $form->fields['firstname']->value;
 
@@ -44,7 +44,7 @@ if ($form->process())
 		}
 
 		if ($fiscalcode != '') {
-			$where .= ($hasMore ? ' AND ' : '') ."(\${OSPITI ATTESI.IDENTIFICATIVO NUCLEO FAMILIARE} = ".$camilaWT->db->qstr($fiscalcode) . " OR \${OSPITI ATTESI.CODICE FISCALE} = ".$camilaWT->db->qstr($fiscalcode) . ")";
+			$where .= ($hasMore ? ' AND ' : '') ."(UPPER(\${OSPITI ATTESI.IDENTIFICATIVO NUCLEO FAMILIARE}) = ".$camilaWT->db->qstr($fiscalcode) . " OR UPPER(\${OSPITI ATTESI.CODICE FISCALE}) = ".$camilaWT->db->qstr($fiscalcode) . ")";
 			$hasMore = true;
 		}
 
